@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, ImageBackground } from "react-native";
+import { StyleSheet, View, ImageBackground, Text } from "react-native";
 import { Button } from "react-native-paper";
-import { fetchList, fetchGenres } from "../helpers/functions";
+import { fetchList } from "../helpers/functions";
 import MyCompanyCard from "./CompanyCard";
 
 export default function Movies() {
@@ -25,7 +25,7 @@ export default function Movies() {
   const image_base_url = "https://image.tmdb.org/t/p/w500";
 
   useEffect(async () => {
-    let genres = await fetchGenres(url_genre);
+    const genres = await fetchList(url_genre);
     setGenres(genres);
   }, []);
 
@@ -74,9 +74,20 @@ export default function Movies() {
   return (
     <View style={styles.container}>
       {companyName.length == 0 && (
-        <Button icon="camera" mode="contained" onPress={() => companyInfo()}>
-          Load Movies
-        </Button>
+        <View style={{ padding: 20 }}>
+          <Text>Welcome to this app.</Text>
+
+          <Text>
+            By Pressing the button you can go through the mvoies provided by the
+            API.
+          </Text>
+
+          <Text>I Hope You enjoy.</Text>
+
+          <Button icon="camera" mode="contained" onPress={() => companyInfo()}>
+            Load Movies
+          </Button>
+        </View>
       )}
 
       {loading === false && (
